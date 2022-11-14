@@ -7,13 +7,20 @@ import {
   CardBody,
   CardTitle,
 } from "reactstrap";
+import DishDetail from "./DishdetailComponent";
 
 class Menu extends Component {
   constructor(props) {
     super(props);
+    console.log("Constructor called");
     this.state = {
       selectedDish: null,
     };
+  }
+
+  // lifecycle Mounting method:-
+  componentDidMount() {
+    console.log("Component Did Mount called");
   }
 
   // Method 1
@@ -23,24 +30,8 @@ class Menu extends Component {
     this.setState({ selectedDish: dish });
   }
 
-  // Method 2
-  // when clicked this function will active
-  // it will show what has to be render
-  renderDish(dish) {
-    if (dish != null)
-      return (
-        <Card>
-          <CardImg top src={dish.image} alt={dish.name} />
-          <CardBody>
-            <CardTitle>{dish.name}</CardTitle>
-            <CardText>{dish.description}</CardText>
-          </CardBody>
-        </Card>
-      );
-    else return <div></div>;
-  }
-
   render() {
+    console.log("Render called");
     const menu = this.props.dishes.map((dish) => {
       return (
         <div className="col-12 col-md-5 m-1">
@@ -62,11 +53,7 @@ class Menu extends Component {
     return (
       <div className="container">
         <div className="row">{menu}</div>
-        <div className="row">
-          <div className="col-12 col-md-5 m-1">
-            {this.renderDish(this.state.selectedDish)}
-          </div>
-        </div>
+        <DishDetail dish={this.state.selectedDish} />
       </div>
     );
   }
