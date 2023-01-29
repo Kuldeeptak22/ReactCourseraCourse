@@ -1,3 +1,4 @@
+/* // Header-Component  */
 .row-header{
     margin:0px auto;
     padding:0px auto;
@@ -10,6 +11,7 @@
     min-height:400px;
 }
 
+/* Footer-Component */
 .footer{
     background-color: #D1C4E9;
     margin:0px auto;
