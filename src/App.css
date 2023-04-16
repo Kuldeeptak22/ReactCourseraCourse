@@ -11,6 +11,19 @@
     min-height:400px;
 }
 
+
+/*Submit Comment model*/
+.rating{
+    width: 100%;
+    border-color: lightgray;
+    padding: 6px;
+    border-radius: 4px;
+}
+.rating option{
+    box-shadow: 3px 2px 6px red;
+    background-color: rgb(247, 238, 238);
+}
+
 /* Footer-Component */
 .footer{
     background-color: #D1C4E9;
