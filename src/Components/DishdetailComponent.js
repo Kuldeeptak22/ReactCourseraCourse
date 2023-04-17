@@ -15,7 +15,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { Control, LocalForm, Errors, Field } from "react-redux-form";
+import { Control, LocalForm, Errors } from "react-redux-form";
 import { Link } from "react-router-dom";
 
 const required = (val) => val && val.length;
@@ -36,7 +36,7 @@ function RenderDish({ dish }) {
   );
 }
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, dishId }) {
   if (comments != null) {
     const commentListItems = comments.map((comment) => {
       return (
@@ -59,7 +59,7 @@ function RenderComments({ comments }) {
       <div className=" col-12 col-md-5 m-1">
         <h4>Comments</h4>
         <ul className="list-unstyled">{commentListItems}</ul>
-        <CommentForm />
+        <CommentForm dishId={dishId} addComment={addComment} />
       </div>
     );
   } else {
@@ -72,12 +72,11 @@ export class CommentForm extends React.Component {
     super(props);
 
     this.handleComment = this.handleComment.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
 
     this.state = {
       isModalOpen: false,
     };
-
-    this.toggleModal = this.toggleModal.bind(this);
   }
 
   toggleModal() {
@@ -86,8 +85,13 @@ export class CommentForm extends React.Component {
     });
   }
   handleComment(values) {
-    console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
+    this.toggleModal();
+    this.props.addComment(
+      this.props.dishId,
+      values.rating,
+      values.yourname,
+      values.message
+    );
   }
 
   render() {
@@ -196,7 +200,11 @@ const DishDetail = (props) => {
         </div>
         <div className="row">
           <RenderDish dish={props.dish} />
-          <RenderComments comments={props.comments} />
+          <RenderComments
+            comments={props.comments}
+            addComment={props.addComment}
+            dishId={props.dish.id}
+          />
         </div>
       </div>
     );
