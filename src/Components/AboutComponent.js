@@ -27,8 +27,8 @@ function RenderLeader({ leader }) {
 }
 
 function About(props) {
-  const leaders = props.leaders.map((leader) => {
-    return <RenderLeader leader={leader} />;
+  const leaders = props.leaders.map((leader, index) => {
+    return <RenderLeader leader={leader} key={index} />;
   });
 
   return (
